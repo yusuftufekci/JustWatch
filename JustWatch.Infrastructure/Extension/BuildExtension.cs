@@ -11,7 +11,7 @@ namespace JustWatch.Infrastructure.Extension
     {
         public static IServiceCollection RegisterMsSqlServices(this IServiceCollection services)
         {
-            var conn = "ConnectionString";
+            var conn = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=JustWatch;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
             services.AddDbContext<JustWatchContext>(options =>
                 options.UseSqlServer(conn), ServiceLifetime.Scoped);
             services.AddScoped(typeof(IJustWatchRepository<>), typeof(JustWatchRepository<>));
