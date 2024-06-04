@@ -1,4 +1,5 @@
-
+using JustWatch.Application.Extension;
+using JustWatch.Infrastructure.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.MediatorServices();
+builder.Services.RegisterMsSqlServices();
+
 
 var app = builder.Build();
 
@@ -22,7 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseExceptionMiddleware();
 app.MapControllers();
 
 app.Run();

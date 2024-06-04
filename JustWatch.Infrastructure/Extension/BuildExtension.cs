@@ -2,6 +2,7 @@
 using JustWatch.Infrastructure.Context;
 using JustWatch.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace JustWatch.Infrastructure.Extension
