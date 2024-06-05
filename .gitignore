@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+appsettings.Development.json
+appsettings.json
+/JustWatch.API/appsettings.Development.json
+/JustWatch.API/appsettings.json
