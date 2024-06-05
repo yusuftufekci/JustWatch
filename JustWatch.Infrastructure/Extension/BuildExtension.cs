@@ -3,17 +3,19 @@ using JustWatch.Infrastructure.Context;
 using JustWatch.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 
 namespace JustWatch.Infrastructure.Extension
 {
     public static class BuildExtension
     {
-        public static IServiceCollection RegisterMsSqlServices(this IServiceCollection services)
+
+        public static IServiceCollection RegisterMsSqlServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var conn = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=JustWatch;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            var connectionString = configuration.GetConnectionString("ConnectionStr");
             services.AddDbContext<JustWatchContext>(options =>
-                options.UseSqlServer(conn), ServiceLifetime.Scoped);
+                options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
             services.AddScoped(typeof(IJustWatchRepository<>), typeof(JustWatchRepository<>));
             return services;
         }

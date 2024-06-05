@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JustWatch.Domain.Entities.JustWatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,26 @@ namespace JustWatch.Infrastructure.Context
            : base(options)
         {
         }
-        // public virtual DbSet<TargetDynamicBanner> TargetDynamicBanner { get; set; }
+         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Users>(entity =>
+            {
+                // Specify the table name (optional if your table name matches the class name)
+                entity.ToTable("Users");
+
+                // Specify primary key
+                entity.HasKey(e => e.Id);
+
+                // Configure columns
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Username).HasColumnName("username").HasMaxLength(50).IsRequired();
+                entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(100).IsRequired();
+                entity.Property(e => e.PasswordHash).HasColumnName("password_hash").HasMaxLength(100).IsRequired();
+                entity.Property(e => e.CreatedAt).HasColumnName("created_at").IsRequired();
+                entity.Property(e => e.UpdatedAt).HasColumnName("updated_at").IsRequired();
+            });
             base.OnModelCreating(modelBuilder);
 
         }

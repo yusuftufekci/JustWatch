@@ -9,8 +9,8 @@ namespace JustWatch.Domain.SeedWork
     public class BaseJustWatchEntity
     {
         public int Id { get; private set; }
-        public DateTime CreateDate { get; private set; }
-        public DateTime UpdateDate { get; private set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     }
 }
